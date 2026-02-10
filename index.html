@@ -1,243 +1,1006 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Johnny Trading - Giới thiệu & Kết nối</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Johnny Trading - Swing Trader & Trend Follower</title>
+    <meta name="description"
+        content="Johnny Trading - Professional Swing Trader combining Fundamental & Technical Analysis for optimal market entries.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
-        body {
-            font-family: 'Be Vietnam Pro', sans-serif;
+        :root {
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #111118;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
+            --bg-card-border: rgba(255, 255, 255, 0.06);
+            --text-primary: #f0f0f5;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-start: #7c3aed;
+            --accent-end: #3b82f6;
+            --accent-glow: rgba(124, 58, 237, 0.3);
+            --accent-text: #a78bfa;
+            --badge-bg: rgba(124, 58, 237, 0.15);
+            --badge-text: #c4b5fd;
+            --divider: rgba(255, 255, 255, 0.06);
+            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 40px rgba(124, 58, 237, 0.15);
+            --nav-bg: rgba(10, 10, 15, 0.85);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f8f9fc;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.8);
+            --bg-card-hover: rgba(255, 255, 255, 0.95);
+            --bg-card-border: rgba(0, 0, 0, 0.08);
+            --text-primary: #111827;
+            --text-secondary: #4b5563;
+            --text-muted: #9ca3af;
+            --accent-start: #7c3aed;
+            --accent-end: #3b82f6;
+            --accent-glow: rgba(124, 58, 237, 0.12);
+            --accent-text: #7c3aed;
+            --badge-bg: rgba(124, 58, 237, 0.08);
+            --badge-text: #6d28d9;
+            --divider: rgba(0, 0, 0, 0.08);
+            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
+            --shadow-glow: 0 0 40px rgba(124, 58, 237, 0.08);
+            --nav-bg: rgba(248, 249, 252, 0.85);
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
             scroll-behavior: smooth;
         }
-        .gradient-bg {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
         }
-        .card-hover {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+        .bg-gradient-orb {
+            position: fixed;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            animation: orbFloat 15s ease-in-out infinite;
         }
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+
+        .bg-gradient-orb-2 {
+            position: fixed;
+            bottom: -300px;
+            left: -200px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            animation: orbFloat2 18s ease-in-out infinite;
         }
-        /* Brand color */
-        .brand-bg { background-color: #2563eb; }
-        .brand-text { color: #2563eb; }
+
+        @keyframes orbFloat {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(-50px, 80px) scale(1.1);
+            }
+        }
+
+        @keyframes orbFloat2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(60px, -60px) scale(1.15);
+            }
+        }
+
+        .grid-pattern {
+            position: fixed;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        [data-theme="light"] .grid-pattern {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+        }
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 24px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid var(--bg-card-border);
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-family: var(--font-primary);
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .toggle-btn:hover {
+            border-color: var(--accent-text);
+            color: var(--accent-text);
+            background: var(--badge-bg);
+        }
+
+        .toggle-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .toggle-btn .icon {
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 80px 20px 40px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 48px 0 40px;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 28px;
+        }
+
+        .avatar-glow {
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+            opacity: 0.6;
+            filter: blur(20px);
+        }
+
+        .avatar-img {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(124, 58, 237, 0.4);
+            z-index: 2;
+            box-shadow: 0 0 24px rgba(124, 58, 237, 0.3), 0 0 48px rgba(59, 130, 246, 0.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .avatar-wrapper:hover .avatar-img {
+            transform: scale(1.05);
+            box-shadow: 0 0 32px rgba(124, 58, 237, 0.45), 0 0 64px rgba(59, 130, 246, 0.2);
+        }
+
+        .hero-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-text) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-tagline {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: 999px;
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 3px;
+            height: 20px;
+            border-radius: 2px;
+            background: linear-gradient(to bottom, var(--accent-start), var(--accent-end));
+        }
+
+        .philosophy-card {
+            background: var(--bg-card);
+            border: 1px solid var(--bg-card-border);
+            border-radius: 16px;
+            padding: 28px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .philosophy-card:hover {
+            background: var(--bg-card-hover);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .philosophy-intro {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .philosophy-item {
+            padding: 16px;
+            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--bg-card-border);
+            transition: all 0.3s ease;
+        }
+
+        .philosophy-item:hover {
+            border-color: rgba(124, 58, 237, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .philosophy-item h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-text);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .philosophy-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .philosophy-item li {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            padding: 3px 0;
+            position: relative;
+            padding-left: 14px;
+        }
+
+        .philosophy-item li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--accent-text);
+            font-weight: 700;
+        }
+
+        .website-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--bg-card-border);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .website-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .website-card:hover::before {
+            opacity: 1;
+        }
+
+        .website-card:hover {
+            border-color: rgba(124, 58, 237, 0.3);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .website-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .website-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        .website-info {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .website-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .website-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .website-arrow {
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .website-card:hover .website-arrow {
+            color: var(--accent-text);
+            transform: translateX(4px);
+        }
+
+        .link-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--bg-card-border);
+            border-radius: 14px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .link-card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(124, 58, 237, 0.2);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .link-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            border: 1px solid var(--bg-card-border);
+        }
+
+        .link-card:hover .link-logo {
+            transform: scale(1.1);
+            box-shadow: 0 0 16px var(--accent-glow);
+        }
+
+        .link-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .link-info h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .link-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .link-badge {
+            padding: 5px 14px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .link-card:hover .link-badge {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        @media (max-width: 500px) {
+            .link-badge {
+                display: none;
+            }
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 500px) {
+            .social-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .social-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 20px 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--bg-card-border);
+            border-radius: 14px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .social-card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(124, 58, 237, 0.25);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+            color: var(--accent-text);
+        }
+
+        .social-card svg {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-card:hover svg {
+            transform: scale(1.2);
+        }
+
+        .social-card span {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 32px 0 24px;
+            border-top: 1px solid var(--divider);
+            margin-top: 32px;
+        }
+
+        .footer p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-5 {
+            transition-delay: 0.5s;
+        }
+
+        .connect-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 600px) {
+            .hero-name {
+                font-size: 1.8rem;
+            }
+
+            .hero-tagline {
+                font-size: 0.95rem;
+            }
+
+            .container {
+                padding: 70px 16px 32px;
+            }
+
+            .philosophy-card {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
-<body class="gradient-bg text-gray-800">
 
-    <div class="container mx-auto max-w-4xl p-4 sm:p-6 md:p-8">
+<body>
+    <div class="bg-gradient-orb"></div>
+    <div class="bg-gradient-orb-2"></div>
+    <div class="grid-pattern"></div>
 
-        <!-- SECTION: GIỚI THIỆU -->
-        <header class="text-center mb-12">
-            <!-- Thay 'avatar.png' bằng tên file ảnh của bạn -->
-            <img src="avatar.png" alt="Ảnh đại diện Johnny Trading" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white shadow-lg object-cover">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-900">Johnny Trading</h1>
-            <p class="text-lg md:text-xl text-gray-600 mt-2">Swing Trader - Nhà Giao Dịch Theo Xu Hướng</p>
+    <nav class="top-bar">
+        <button id="langToggle" class="toggle-btn" onclick="toggleLanguage()" aria-label="Toggle Language">
+            <span class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+            </span>
+            <span id="langLabel">EN</span>
+        </button>
+        <button id="themeToggle" class="toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+            <span class="icon" id="themeIcon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+            </span>
+            <span id="themeLabel">Dark</span>
+        </button>
+    </nav>
+
+    <div class="container">
+        <!-- HERO -->
+        <header class="hero fade-up">
+            <div class="avatar-wrapper">
+                <div class="avatar-glow"></div>
+                <img src="avatar.png" alt="Johnny Trading Avatar" class="avatar-img">
+            </div>
+            <h1 class="hero-name">Johnny Trading</h1>
+            <p class="hero-tagline" data-i18n="tagline">Swing Trader · Trend Follower</p>
+            <div class="hero-badge">
+                <span class="dot"></span>
+                <span data-i18n="badge">Available for Collaboration</span>
+            </div>
         </header>
 
-        <main>
-            <!-- SECTION: TRIẾT LÝ GIAO DỊCH -->
-            <section id="philosophy" class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-md mb-12">
-                <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-gray-900">Triết Lý Giao Dịch Của Tôi</h2>
-                <p class="text-base md:text-lg leading-relaxed text-gray-700 mb-6">
-                    Trên hành trình trading của mình, tôi nhận ra rằng chìa khóa không nằm ở việc lựa chọn giữa Phân Tích Cơ Bản hay Phân Tích Kỹ Thuật, mà là sự kết hợp tinh hoa của cả hai. Triết lý của tôi là dùng Phân Tích Cơ Bản để "săn lùng" những thị trường tiềm năng, nơi có khả năng xảy ra những dịch chuyển lớn, và sau đó, sử dụng Phân Tích Kỹ Thuật như một chiếc la bàn chính xác để tìm ra thời điểm vàng để vào lệnh.
-                </p>
-                <div class="space-y-4 text-gray-700">
-                    <div>
-                        <h3 class="font-bold text-lg brand-text">Nền tảng Cốt lõi:</h3>
-                        <ul class="list-disc list-inside ml-4">
-                            <li><strong>Phân Tích Cơ Bản:</strong> Tìm thị trường có khả năng dịch chuyển lớn.</li>
-                            <li><strong>Phân Tích Kỹ Thuật:</strong> Tìm thời điểm vào lệnh tối ưu.</li>
+        <!-- TRADING PHILOSOPHY -->
+        <section class="section fade-up delay-1">
+            <h2 class="section-title" data-i18n="philosophyTitle">Trading Philosophy</h2>
+            <div class="philosophy-card">
+                <p class="philosophy-intro" data-i18n="philosophyIntro">Fundamentals to find the market. Technicals to
+                    time the entry. The synergy of both is my edge.</p>
+                <div class="philosophy-grid">
+                    <div class="philosophy-item">
+                        <h4 data-i18n="coreFoundation">⚡ Core</h4>
+                        <ul>
+                            <li data-i18n="fa">📈 FA — Big movement potential</li>
+                            <li data-i18n="ta">📉 TA — Optimal entry timing</li>
                         </ul>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-lg brand-text">Thiết lập Kỹ thuật</h3>
-                         <ul class="list-disc list-inside ml-4">
-                            <li><strong>Vị Trí (Location):</strong> Xác định vùng Cung/Cầu "fresh" để biết giá đang "rẻ" hay "đắt".</li>
-                            <li><strong>Xu Hướng (Direction):</strong> Xác định xu hướng chính dựa trên cấu trúc đỉnh/đáy.</li>
+                    <div class="philosophy-item">
+                        <h4 data-i18n="technicalSetup">🎯 Technical</h4>
+                        <ul>
+                            <li data-i18n="location">📍 Fresh Supply/Demand zones</li>
+                            <li data-i18n="direction">🧭 Trend via swing structure</li>
                         </ul>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-lg brand-text">Thiết lập Cơ bản</h3>
-                         <ul class="list-disc list-inside ml-4">
-                            <li><strong>Chỉ Số COT:</strong> Giao dịch CÙNG PHE với Commercials (hiệu quả với thị trường hữu hạn).</li>
-                            <li><strong>Tính Mùa Vụ (True Seasonality):</strong> Cho biết "KHI NÀO" có thể là thời điểm tốt để mua/bán.</li>
-                             <li><strong>Định Giá (Valuation):</strong> Cho biết giá đang "RẺ" hay "ĐẮT" một cách tương đối.</li>
+                    <div class="philosophy-item">
+                        <h4 data-i18n="fundamentalSetup">📊 Fundamental</h4>
+                        <ul>
+                            <li data-i18n="cot">🏦 COT — Trade with Commercials</li>
+                            <li data-i18n="seasonality">📅 Seasonality — When to act</li>
+                            <li data-i18n="valuation">💰 Valuation — Cheap or expensive</li>
                         </ul>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-lg brand-text">Thời Điểm & Quản Lý</h3>
-                         <ul class="list-disc list-inside ml-4">
-                            <li><strong>Thời điểm vào lệnh (LTF Timing):</strong> Tìm vùng Cung/Cầu trên khung nhỏ và kiểm tra chất lượng.</li>
-                            <li><strong>Quản lý Giao dịch:</strong> Chốt lời và dời điểm dừng lỗ phụ thuộc vào loại xu hướng HTF.</li>
+                    <div class="philosophy-item">
+                        <h4 data-i18n="timingMgmt">⏱ Execution</h4>
+                        <ul>
+                            <li data-i18n="timing">🔬 LTF S/D zone entries</li>
+                            <li data-i18n="management">🛡️ TP &amp; SL by HTF trend</li>
                         </ul>
                     </div>
                 </div>
-            </section>
-            
-            <!-- SECTION: LINK SÀN & REF -->
-            <section id="links" class="mb-12">
-                <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-gray-900">Các Sàn Giao Dịch Tôi Hay Dùng</h2>
-                <div class="space-y-4">
-                    <a href="https://bingx.com/en/invite/GIMEA0" target="_blank" class="block bg-white/80 backdrop-blur-sm p-5 rounded-2xl shadow-md card-hover">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-4">
-                                <!-- Thay 'bingx.png' bằng tên file logo của bạn -->
-                                <img src="bingx.png" alt="BingX Logo" class="w-10 h-10 rounded-full object-cover">
-                                <div>
-                                    <h3 class="font-bold text-lg brand-text">BingX</h3>
-                                    <p class="text-gray-600">Ưu đãi bonus chào mừng lên tới 6000 USDT.</p>
-                                </div>
-                            </div>
-                            <span class="brand-bg text-white text-sm font-semibold py-2 px-4 rounded-lg hidden sm:block">Đăng Ký</span>
-                        </div>
-                    </a>
-                    <a href="https://accounts.binance.com/register?ref=YFKBUBMX" target="_blank" class="block bg-white/80 backdrop-blur-sm p-5 rounded-2xl shadow-md card-hover">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-4">
-                                <img src="binance.png" alt="Binance Logo" class="w-10 h-10 rounded-full object-cover">
-                                <div>
-                                    <h3 class="font-bold text-lg brand-text">Binance</h3>
-                                    <p class="text-gray-600">Giảm 20% phí giao dịch trọn đời.</p>
-                                </div>
-                            </div>
-                            <span class="brand-bg text-white text-sm font-semibold py-2 px-4 rounded-lg hidden sm:block">Đăng Ký</span>
-                        </div>
-                    </a>
-                     <a href="https://one.exnesstrack.net/a/cmj9hfgwcd/?campaign=23979" target="_blank" class="block bg-white/80 backdrop-blur-sm p-5 rounded-2xl shadow-md card-hover">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-4">
-                                <img src="exness.png" alt="Exness Logo" class="w-10 h-10 rounded-full object-cover">
-                                <div>
-                                    <h3 class="font-bold text-lg brand-text">Exness</h3>
-                                    <p class="text-gray-600">Giảm 15% phí giao dịch, nạp rút nhanh chóng.</p>
-                                </div>
-                            </div>
-                            <span class="brand-bg text-white text-sm font-semibold py-2 px-4 rounded-lg hidden sm:block">Đăng Ký</span>
-                        </div>
-                    </a>
-                    <a href="https://www.xmasianbroker.com/vn/referral?token=ELN2YoW-HlvBb5ju4gFcmg" target="_blank" class="block bg-white/80 backdrop-blur-sm p-5 rounded-2xl shadow-md card-hover">
-                        <div class="flex items-center justify-between">
-                           <div class="flex items-center space-x-4">
-                                <img src="xm.png" alt="XM Logo" class="w-10 h-10 rounded-full object-cover">
-                                <div>
-                                    <h3 class="font-bold text-lg brand-text">XM</h3>
-                                    <p class="text-gray-600">Giảm 20% phí và nhiều chương trình bonus hấp dẫn.</p>
-                                </div>
-                            </div>
-                            <span class="brand-bg text-white text-sm font-semibold py-2 px-4 rounded-lg hidden sm:block">Đăng Ký</span>
-                        </div>
-                    </a>
-                    <a href="https://www.bitget.com/vi/expressly?channelCode=298w&vipCode=kkal&languageType=4&groupId=546385" target="_blank" class="block bg-white/80 backdrop-blur-sm p-5 rounded-2xl shadow-md card-hover">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-4">
-                                <img src="bitget.png" alt="Bitget Logo" class="w-10 h-10 rounded-full object-cover">
-                                <div>
-                                    <h3 class="font-bold text-lg brand-text">Bitget</h3>
-                                    <p class="text-gray-600">Sàn giao dịch phái sinh Crypto.</p>
-                                </div>
-                            </div>
-                            <span class="brand-bg text-white text-sm font-semibold py-2 px-4 rounded-lg hidden sm:block">Đăng Ký</span>
-                        </div>
-                    </a>
-                </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- SECTION: CÔNG CỤ & KHÓA HỌC -->
-            <section id="tools" class="mb-12">
-                <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-gray-900">Một Số Tool Của Tôi</h2>
-                 <div class="space-y-4">
-                    <a href="https://in.tradingview.com/script/cXYF0A1s-COT-Net-Index-Minimal-Index-Alerts/" target="_blank" class="block bg-white/80 backdrop-blur-sm p-5 rounded-2xl shadow-md card-hover">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-4">
-                                <img src="tradingview.png" alt="TradingView Logo" class="w-10 h-10 rounded-full object-cover">
-                                <div>
-                                    <h3 class="font-bold text-lg brand-text">COT Index</h3>
-                                    <p class="text-gray-600">Công cụ theo dõi vị thế của các nhà giao dịch lớn.</p>
-                                </div>
-                            </div>
-                            <span class="brand-bg text-white text-sm font-semibold py-2 px-4 rounded-lg hidden sm:block">Xem Script</span>
-                        </div>
-                    </a>
-                    <a href="https://in.tradingview.com/script/RLh7nc4U-Auto-Reference-Relative-Valuation-Oscillator/" target="_blank" class="block bg-white/80 backdrop-blur-sm p-5 rounded-2xl shadow-md card-hover">
-                        <div class="flex items-center justify-between">
-                             <div class="flex items-center space-x-4">
-                                <img src="tradingview.png" alt="TradingView Logo" class="w-10 h-10 rounded-full object-cover">
-                                <div>
-                                    <h3 class="font-bold text-lg brand-text">Valuation Index</h3>
-                                    <p class="text-gray-600">Chỉ báo định giá tương đối thị trường.</p>
-                                </div>
-                            </div>
-                            <span class="brand-bg text-white text-sm font-semibold py-2 px-4 rounded-lg hidden sm:block">Xem Script</span>
-                        </div>
-                    </a>
-                     <a href="https://docs.google.com/spreadsheets/d/1pwx1oGJyUKC5zUzOAY6ECqriyfZlwqx7DHoVSim3wkw/edit?gid=1480190477#gid=1480190477" target="_blank" class="block bg-white/80 backdrop-blur-sm p-5 rounded-2xl shadow-md card-hover">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-4">
-                                <img src="google sheet.png" alt="Google Sheet Logo" class="w-10 h-10 rounded-full object-cover">
-                                <div>
-                                    <h3 class="font-bold text-lg brand-text">File thi quỹ FTMO</h3>
-                                    <p class="text-gray-600">Giảm 20% phí thi quỹ sau khi hoàn thành file.</p>
-                                </div>
-                            </div>
-                            <span class="brand-bg text-white text-sm font-semibold py-2 px-4 rounded-lg hidden sm:block">Xem File</span>
-                        </div>
-                    </a>
-                    <a href="https://cryptocurrency.market/?ref=johnny" target="_blank" class="block bg-white/80 backdrop-blur-sm p-5 rounded-2xl shadow-md card-hover">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-4">
-                                <img src="cryptocurrency market.png" alt="Cryptocurrency Market Logo" class="w-10 h-10 rounded-full object-cover">
-                                <div>
-                                    <h3 class="font-bold text-lg brand-text">Cryptocurrency Market</h3>
-                                    <p class="text-gray-600">Khóa học đầu tư crypto theo index tốt nhất mà tôi biết.</p>
-                                </div>
-                            </div>
-                            <span class="brand-bg text-white text-sm font-semibold py-2 px-4 rounded-lg hidden sm:block">Tìm Hiểu</span>
-                        </div>
-                    </a>
-                </div>
-            </section>
+        <!-- EXCHANGES: Exness -> XM -> Binance -> Bitget -> BingX -->
+        <section class="section fade-up delay-2">
+            <h2 class="section-title" data-i18n="exchangesTitle">Exchanges I Use</h2>
+            <div class="link-list">
+                <a href="https://one.exnesstrack.net/a/cmj9hfgwcd/?campaign=23979" target="_blank" class="link-card"
+                    id="link-exness">
+                    <img src="exness.png" alt="Exness" class="link-logo">
+                    <div class="link-info">
+                        <h3>Exness</h3>
+                        <p data-i18n="exnessDesc">15% fee discount, fast deposits &amp; withdrawals</p>
+                    </div>
+                    <span class="link-badge" data-i18n="signUp">Sign Up</span>
+                </a>
+                <a href="https://www.xmasianbroker.com/vn/referral?token=ELN2YoW-HlvBb5ju4gFcmg" target="_blank"
+                    class="link-card" id="link-xm">
+                    <img src="xm.png" alt="XM" class="link-logo">
+                    <div class="link-info">
+                        <h3>XM</h3>
+                        <p data-i18n="xmDesc">20% fee discount plus attractive bonus programs</p>
+                    </div>
+                    <span class="link-badge" data-i18n="signUp">Sign Up</span>
+                </a>
+                <a href="https://accounts.binance.com/register?ref=YFKBUBMX" target="_blank" class="link-card"
+                    id="link-binance">
+                    <img src="binance.png" alt="Binance" class="link-logo">
+                    <div class="link-info">
+                        <h3>Binance</h3>
+                        <p data-i18n="binanceDesc">20% trading fee discount for life</p>
+                    </div>
+                    <span class="link-badge" data-i18n="signUp">Sign Up</span>
+                </a>
+                <a href="https://www.bitget.com/vi/expressly?channelCode=298w&vipCode=kkal&languageType=4&groupId=546385"
+                    target="_blank" class="link-card" id="link-bitget">
+                    <img src="bitget.png" alt="Bitget" class="link-logo">
+                    <div class="link-info">
+                        <h3>Bitget</h3>
+                        <p data-i18n="bitgetDesc">Crypto derivatives exchange</p>
+                    </div>
+                    <span class="link-badge" data-i18n="signUp">Sign Up</span>
+                </a>
+                <a href="https://bingx.com/en/invite/GIMEA0" target="_blank" class="link-card" id="link-bingx">
+                    <img src="bingx.png" alt="BingX" class="link-logo">
+                    <div class="link-info">
+                        <h3>BingX</h3>
+                        <p data-i18n="bingxDesc">Welcome bonus up to 6,000 USDT</p>
+                    </div>
+                    <span class="link-badge" data-i18n="signUp">Sign Up</span>
+                </a>
+            </div>
+        </section>
 
-            <!-- SECTION: KẾT NỐI MẠNG XÃ HỘI -->
-            <section id="social" class="mt-12 text-center border-t border-gray-300 pt-8">
-                <p class="text-gray-700 mb-6 max-w-2xl mx-auto">Nếu bạn có cùng quan điểm giao dịch với tôi và muốn nghiên cứu sâu hơn, hãy kết nối với tôi qua các nền tảng bên dưới.</p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-lg mx-auto">
-                    <a href="https://x.com/JohnnyTradingVN" target="_blank" class="bg-white/80 backdrop-blur-sm p-4 rounded-2xl flex flex-col items-center justify-center text-center card-hover shadow-md">
-                        <svg class="w-8 h-8 mb-2 text-gray-800" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
-                        <span class="font-semibold text-sm">X (Twitter)</span>
-                    </a>
-                    <a href="https://www.youtube.com/@JohnnyTradingVN" target="_blank" class="bg-white/80 backdrop-blur-sm p-4 rounded-2xl flex flex-col items-center justify-center text-center card-hover shadow-md">
-                        <svg class="w-8 h-8 mb-2 text-red-600" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"></path></svg>
-                        <span class="font-semibold text-sm">YouTube</span>
-                    </a>
-                    <a href="https://www.tiktok.com/@johnnytradingvn" target="_blank" class="bg-white/80 backdrop-blur-sm p-4 rounded-2xl flex flex-col items-center justify-center text-center card-hover shadow-md">
-                        <svg class="w-8 h-8 mb-2 text-gray-800" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.03-4.83-1-6.7-2.91-1.85-1.88-2.75-4.24-2.68-6.75.02-1.12.31-2.25.75-3.31.62-1.5 1.66-2.73 3.01-3.52.61-.35 1.25-.6 1.9-.78.21-.06.43-.09.64-.13.02-1.93.01-3.85.01-5.78-.01-1.3.02-2.6.01-3.9.68-.01 1.36-.01 2.04 0z"></path></svg>
-                        <span class="font-semibold text-sm">TikTok</span>
-                    </a>
-                    <a href="https://t.me/JohnnyTranVN" target="_blank" class="bg-white/80 backdrop-blur-sm p-4 rounded-2xl flex flex-col items-center justify-center text-center card-hover shadow-md">
-                        <svg class="w-8 h-8 mb-2 text-sky-500" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.17.91-.494 1.208-.822 1.23-.696.047-1.225-.46-1.9- .902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.04-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.24-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.662 3.488-1.36 5.758-2.245 6.666-2.613 3.14-1.28 3.83-1.54 4.24-1.536z"></path></svg>
-                        <span class="font-semibold text-sm">Telegram</span>
-                    </a>
-                </div>
-            </section>
-        </main>
+        <!-- SOCIAL CONNECT -->
+        <section class="section fade-up delay-3">
+            <h2 class="section-title" data-i18n="connectTitle">Connect With Me</h2>
+            <p class="connect-text" data-i18n="connectDesc">If you share my trading perspective and want to dive deeper,
+                let's connect through the platforms below.</p>
+            <div class="social-grid">
+                <a href="https://x.com/JohnnyTradingVN" target="_blank" class="social-card" id="social-x">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg>
+                    <span>X (Twitter)</span>
+                </a>
+                <a href="https://www.youtube.com/@JohnnyTradingVN" target="_blank" class="social-card"
+                    id="social-youtube">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z" />
+                    </svg>
+                    <span>YouTube</span>
+                </a>
+                <a href="https://www.tiktok.com/@johnnytradingvn" target="_blank" class="social-card"
+                    id="social-tiktok">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.48.02-2.96-.4-4.2-1.15 0 0 0 0 0 0-2.21-1.33-3.73-3.77-3.76-6.47-.01-.73.08-1.47.28-2.18.62-2.25 2.15-4.07 4.13-5.03.82-.4 1.72-.64 2.65-.7.3-.02.6-.01.9.01v4.19c-.3-.05-.61-.07-.92-.05-.97.07-1.86.57-2.38 1.39-.3.47-.44 1.02-.42 1.58.07 1.56 1.39 2.76 2.95 2.69.78-.04 1.49-.39 2.01-.95.26-.28.45-.62.56-.98.07-.24.1-.49.1-.75V.02h-.01z" />
+                    </svg>
+                    <span>TikTok</span>
+                </a>
+                <a href="https://t.me/JohnnyTranVN" target="_blank" class="social-card" id="social-telegram">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.17.91-.494 1.208-.822 1.23-.696.047-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.04-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.24-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.662 3.488-1.36 5.758-2.245 6.666-2.613 3.14-1.28 3.83-1.54 4.24-1.536z" />
+                    </svg>
+                    <span>Telegram</span>
+                </a>
+            </div>
+        </section>
 
-        <!-- SECTION: FOOTER -->
-        <footer class="text-center mt-12 pt-8">
-            <p class="text-gray-600">&copy; <span id="year"></span> Johnny Trading. All Rights Reserved.</p>
+        <!-- CTA: SNIPER JOURNAL -->
+        <section class="section fade-up delay-4">
+            <h2 class="section-title" data-i18n="ctaTitle">🚀 Level Up Your Trading</h2>
+            <p class="connect-text" data-i18n="ctaDesc">Track every trade, analyze your performance, and sharpen your
+                edge — all in one place.</p>
+            <a href="https://sniperjournal.app" target="_blank" class="website-card">
+                <div class="website-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5" />
+                        <path d="M2 12l10 5 10-5" />
+                    </svg>
+                </div>
+                <div class="website-info">
+                    <h3>SniperJournal.app</h3>
+                    <p data-i18n="sniperDesc">Your all-in-one trading journal — start for free</p>
+                </div>
+                <div class="website-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                </div>
+            </a>
+        </section>
+
+        <footer class="footer fade-up delay-5">
+            <p>&copy; <span id="year"></span> Johnny Trading. All Rights Reserved.</p>
         </footer>
-
     </div>
 
     <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
+        const translations = {
+            en: {
+                tagline: 'Swing Trader · Trend Follower',
+                badge: 'Available for Collaboration',
+                philosophyTitle: 'Trading Philosophy',
+                philosophyIntro: 'Fundamentals to find the market. Technicals to time the entry. The synergy of both is my edge.',
+                coreFoundation: '⚡ Core',
+                fa: '📈 FA — Big movement potential',
+                ta: '📉 TA — Optimal entry timing',
+                technicalSetup: '🎯 Technical',
+                location: '📍 Fresh Supply/Demand zones',
+                direction: '🧭 Trend via swing structure',
+                fundamentalSetup: '📊 Fundamental',
+                cot: '🏦 COT — Trade with Commercials',
+                seasonality: '📅 Seasonality — When to act',
+                valuation: '💰 Valuation — Cheap or expensive',
+                timingMgmt: '⏱ Execution',
+                timing: '🔬 LTF S/D zone entries',
+                management: '🛡️ TP & SL by HTF trend',
+                exchangesTitle: 'Exchanges I Use',
+                bingxDesc: 'Welcome bonus up to 6,000 USDT',
+                binanceDesc: '20% trading fee discount for life',
+                exnessDesc: '15% fee discount, fast deposits & withdrawals',
+                xmDesc: '20% fee discount plus attractive bonus programs',
+                bitgetDesc: 'Crypto derivatives exchange',
+                signUp: 'Sign Up',
+                connectTitle: 'Connect With Me',
+                connectDesc: "If you share my trading perspective and want to dive deeper, let's connect through the platforms below.",
+                ctaTitle: '🚀 Level Up Your Trading',
+                ctaDesc: 'Track every trade, analyze your performance, and sharpen your edge — all in one place.',
+                sniperDesc: 'Your all-in-one trading journal — start for free',
+            },
+            vi: {
+                tagline: 'Swing Trader · Nhà Giao Dịch Theo Xu Hướng',
+                badge: 'Sẵn sàng hợp tác',
+                philosophyTitle: 'Triết Lý Giao Dịch',
+                philosophyIntro: 'Cơ bản để tìm thị trường. Kỹ thuật để canh thời điểm. Sự kết hợp cả hai chính là lợi thế của tôi.',
+                coreFoundation: '⚡ Cốt Lõi',
+                fa: '📈 PTCB — Thị trường dịch chuyển lớn',
+                ta: '📉 PTKT — Thời điểm vào lệnh tối ưu',
+                technicalSetup: '🎯 Kỹ Thuật',
+                location: '📍 Vùng Cung/Cầu "fresh"',
+                direction: '🧭 Xu hướng qua cấu trúc đỉnh/đáy',
+                fundamentalSetup: '📊 Cơ Bản',
+                cot: '🏦 COT — Giao dịch cùng phe Commercials',
+                seasonality: '📅 Mùa vụ — Biết KHI NÀO hành động',
+                valuation: '💰 Định giá — Rẻ hay đắt',
+                timingMgmt: '⏱ Thực Thi',
+                timing: '🔬 Vào lệnh tại vùng S/D khung nhỏ',
+                management: '🛡️ TP & SL theo xu hướng HTF',
+                exchangesTitle: 'Các Sàn Giao Dịch Tôi Hay Dùng',
+                bingxDesc: 'Ưu đãi bonus chào mừng lên tới 6,000 USDT',
+                binanceDesc: 'Giảm 20% phí giao dịch trọn đời',
+                exnessDesc: 'Giảm 15% phí giao dịch, nạp rút nhanh chóng',
+                xmDesc: 'Giảm 20% phí và nhiều chương trình bonus hấp dẫn',
+                bitgetDesc: 'Sàn giao dịch phái sinh Crypto',
+                signUp: 'Đăng Ký',
+                connectTitle: 'Kết Nối Với Tôi',
+                connectDesc: 'Nếu bạn có cùng quan điểm giao dịch với tôi và muốn nghiên cứu sâu hơn, hãy kết nối qua các nền tảng bên dưới.',
+                ctaTitle: '🚀 Nâng Tầm Giao Dịch',
+                ctaDesc: 'Ghi lại mọi giao dịch, phân tích hiệu suất, và mài giũa lợi thế — tất cả trong một nơi.',
+                sniperDesc: 'Nhật ký giao dịch tất cả trong 1 — bắt đầu miễn phí',
+            }
+        };
+
+        let currentLang = localStorage.getItem('lang') || 'en';
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+
+        function init() {
+            document.getElementById('year').textContent = new Date().getFullYear();
+            applyTheme(currentTheme);
+            applyLanguage(currentLang);
+            initScrollAnimations();
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'vi' : 'en';
+            localStorage.setItem('lang', currentLang);
+            applyLanguage(currentLang);
+        }
+
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            document.getElementById('langLabel').textContent = lang === 'en' ? 'EN' : 'VI';
+            document.documentElement.lang = lang === 'en' ? 'en' : 'vi';
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.textContent = t[key];
+            });
+        }
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('theme', currentTheme);
+            applyTheme(currentTheme);
+        }
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            const label = document.getElementById('themeLabel');
+            const icon = document.getElementById('themeIcon');
+            if (theme === 'dark') {
+                label.textContent = 'Dark';
+                icon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+            } else {
+                label.textContent = 'Light';
+                icon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+            }
+        }
+
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        }
+
+        init();
     </script>
-
 </body>
-</html>
 
+</html>
