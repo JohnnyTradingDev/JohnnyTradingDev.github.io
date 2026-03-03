@@ -669,6 +669,153 @@
                 padding: 20px;
             }
         }
+
+        /* ===== CERTIFICATES SECTION ===== */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cert-card {
+            background: var(--bg-card);
+            border: 1px solid var(--bg-card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .cert-card:hover {
+            border-color: rgba(255, 193, 7, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 0 40px rgba(255, 193, 7, 0.1), 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .cert-card-img {
+            width: 100%;
+            aspect-ratio: 16 / 11;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cert-card:hover .cert-card-img {
+            transform: scale(1.03);
+        }
+
+        .cert-card-body {
+            padding: 16px 20px;
+        }
+
+        .cert-card-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 12px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 152, 0, 0.15));
+            color: #fbbf24;
+            font-size: 0.72rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        [data-theme="light"] .cert-card-badge {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.12), rgba(255, 152, 0, 0.12));
+            color: #d97706;
+        }
+
+        .cert-card-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .cert-card-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .cert-lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        .cert-lightbox.active {
+            display: flex;
+            animation: lbFadeIn 0.3s ease;
+        }
+
+        .cert-lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            animation: lbZoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cert-lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 28px;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            font-size: 22px;
+            transition: all 0.3s;
+        }
+
+        .cert-lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: rotate(90deg);
+        }
+
+        @keyframes lbFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes lbZoomIn {
+            from {
+                transform: scale(0.85);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
@@ -807,6 +954,39 @@
             </div>
         </section>
 
+        <!-- CERTIFICATES & ACHIEVEMENTS -->
+        <section class="section fade-up delay-3" id="certificates">
+            <h2 class="section-title" data-i18n="certsTitle">Certificates & Achievements</h2>
+            <div class="cert-grid">
+                <div class="cert-card" onclick="openCertLightbox('cert-funded-trader-10k.png')">
+                    <img src="cert-funded-trader-10k.png" alt="The Funded Trader - $10K Standard Challenge Phase 2"
+                        class="cert-card-img" loading="lazy">
+                    <div class="cert-card-body">
+                        <div class="cert-card-badge">🏆 <span data-i18n="certsPassed">Passed</span></div>
+                        <h3 class="cert-card-title">The Funded Trader</h3>
+                        <p class="cert-card-meta" data-i18n="certTFTMeta">$10K Standard Challenge · Phase 2 · July 2023
+                        </p>
+                    </div>
+                </div>
+                <div class="cert-card" onclick="openCertLightbox('cert-sure-leverage-50k.png')">
+                    <img src="cert-sure-leverage-50k.png" alt="Sure Leverage Funding - $50K Certificate"
+                        class="cert-card-img" loading="lazy">
+                    <div class="cert-card-body">
+                        <div class="cert-card-badge">🏆 <span data-i18n="certsPassed">Passed</span></div>
+                        <h3 class="cert-card-title">Sure Leverage Funding</h3>
+                        <p class="cert-card-meta" data-i18n="certSLMeta">$50K Funded Account · Recognition Certificate
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox Modal -->
+        <div class="cert-lightbox" id="certLightbox">
+            <button class="cert-lightbox-close" onclick="closeCertLightbox()" aria-label="Close">✕</button>
+            <img id="certLightboxImg" src="" alt="Certificate">
+        </div>
+
         <!-- SOCIAL CONNECT -->
         <section class="section fade-up delay-3">
             <h2 class="section-title" data-i18n="connectTitle">Connect With Me</h2>
@@ -911,6 +1091,10 @@
                 ctaTitle: '🚀 Level Up Your Trading',
                 ctaDesc: 'Track every trade, analyze your performance, and sharpen your edge — all in one place.',
                 sniperDesc: 'Your all-in-one trading journal — start for free',
+                certsTitle: 'Certificates & Achievements',
+                certsPassed: 'Passed',
+                certTFTMeta: '$10K Standard Challenge · Phase 2 · July 2023',
+                certSLMeta: '$50K Funded Account · Recognition Certificate',
             },
             vi: {
                 tagline: 'Swing Trader · Nhà Giao Dịch Theo Xu Hướng',
@@ -942,6 +1126,10 @@
                 ctaTitle: '🚀 Nâng Tầm Giao Dịch',
                 ctaDesc: 'Ghi lại mọi giao dịch, phân tích hiệu suất, và mài giũa lợi thế — tất cả trong một nơi.',
                 sniperDesc: 'Nhật ký giao dịch tất cả trong 1 — bắt đầu miễn phí',
+                certsTitle: 'Chứng Chỉ & Thành Tựu',
+                certsPassed: 'Đã vượt qua',
+                certTFTMeta: 'Tài khoản $10K · Standard Challenge · Phase 2 · Tháng 7/2023',
+                certSLMeta: 'Tài khoản Funded $50K · Chứng nhận thành tích',
             }
         };
 
@@ -998,6 +1186,27 @@
             }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
             document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         }
+
+        function openCertLightbox(src) {
+            const lb = document.getElementById('certLightbox');
+            document.getElementById('certLightboxImg').src = src;
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCertLightbox() {
+            const lb = document.getElementById('certLightbox');
+            lb.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('certLightbox').addEventListener('click', function (e) {
+            if (e.target === this) closeCertLightbox();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeCertLightbox();
+        });
 
         init();
     </script>
